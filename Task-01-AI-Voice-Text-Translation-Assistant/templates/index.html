@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Voice & Text Translation Assistant</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="container py-5">
+
+    <div class="translator-card">
+        <div class="translator-header d-flex align-items-center justify-content-between mb-3 flex-wrap">
+            <div>
+                <h1 class="title">
+                    <i class="fa-solid fa-language"></i>
+                    AI Voice Translator
+                </h1>
+            </div>
+            <div class="header-actions">
+                <button id="historyBtn" class="header-action-btn" type="button">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    View History
+                </button>
+                <label class="save-history-toggle" for="saveHistory">
+                    <input id="saveHistory" type="checkbox" checked>
+                    <span class="toggle-switch" aria-hidden="true"></span>
+                    <span>Save History</span>
+                </label>
+            </div>
+            <div class="theme-action">
+                <button id="themeBtn" class="theme-btn" title="Change theme">
+                    <i class="fa-solid fa-sun"></i>
+                </button>
+                <div class="theme-label">Theme</div>
+            </div>
+        </div>
+
+        <!-- Language Selection -->
+
+        <div class="row mt-4">
+
+            <div class="col-md-5 mb-3">
+
+                <label>From</label>
+
+                <select id="sourceLang" class="form-select">
+                    <option value="auto">Auto Detect</option>
+                </select>
+
+            </div>
+
+            <div class="col-md-2 text-center swap-area">
+
+                <button id="swapBtn" class="icon-btn">
+
+                    <i class="fa-solid fa-right-left"></i>
+
+                </button>
+
+            </div>
+
+            <div class="col-md-5">
+
+                <label>To</label>
+
+                <select id="targetLang" class="form-select"></select>
+
+            </div>
+
+        </div>
+
+        <!-- Input -->
+
+        <div class="mt-4">
+
+            <label>Input Text</label>
+
+            <textarea
+                    id="inputText"
+                    class="form-control"
+                    rows="7"
+                    placeholder="Type something here or use the microphone..."></textarea>
+
+        </div>
+
+        <!-- Buttons -->
+
+        <div class="button-group mt-3">
+
+            <button class="btn btn-primary" id="micBtn">
+
+                <i class="fa-solid fa-microphone"></i>
+
+                Speak
+
+            </button>
+
+            <button class="btn btn-danger" id="clearBtn">
+
+                <i class="fa-solid fa-trash"></i>
+
+                Clear
+
+            </button>
+
+        </div>
+
+        <div class="d-grid mt-4">
+
+            <button class="btn btn-success btn-lg" id="translateBtn">
+
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                Translate
+
+            </button>
+
+        </div>
+
+        <!-- Output -->
+
+        <div class="mt-4">
+
+            <label>Translated Text</label>
+
+            <textarea
+                    id="outputText"
+                    class="form-control"
+                    rows="7"
+                    readonly
+                    placeholder="Translation will appear here..."></textarea>
+
+        </div>
+
+        <!-- Output Buttons -->
+
+        <div class="button-group mt-3">
+
+            <button class="btn btn-info" id="listenBtn">
+
+                <i class="fa-solid fa-volume-high"></i>
+
+                Listen
+
+            </button>
+
+            <button class="btn btn-secondary" id="copyBtn">
+
+                <i class="fa-solid fa-copy"></i>
+
+                Copy
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="modal fade" id="historyModal" tabindex="-1" aria-labelledby="historyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-content history-modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title fs-5" id="historyModalLabel"><i class="fa-solid fa-clock-rotate-left"></i> Translation History</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="historyList"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="clearHistoryBtn"><i class="fa-solid fa-trash"></i> Clear History</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>
